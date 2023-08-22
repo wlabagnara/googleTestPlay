@@ -1,0 +1,135 @@
+
+Reference: https://google.github.io/googletest/quickstart-cmake.html
+
+
+*** Command line build and run of google test...
+
+================
+
+Command summary: Run from your project folder...
+
+1) cmake -S . -B build
+
+2) cmake --build build
+
+3) cd build
+
+4) ctest
+
+5) ctest --rerun-failed --output-on-failure  (get verboseness on failed tests)
+
+================
+
+
+C:\Projects\googleTestPlay\my_project>cmake -S . -B build
+-- Building for: Visual Studio 17 2022
+-- Selecting Windows SDK version 10.0.22000.0 to target Windows 10.0.22621.
+-- The C compiler identification is MSVC 19.35.32215.0
+-- The CXX compiler identification is MSVC 19.35.32215.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.35.32215/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.35.32215/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Warning (dev) at C:/Program Files/CMake/share/cmake-3.25/Modules/FetchContent.cmake:1284 (message):
+  The DOWNLOAD_EXTRACT_TIMESTAMP option was not given and policy CMP0135 is
+  not set.  The policy's OLD behavior will be used.  When using a URL
+  download, the timestamps of extracted files should preferably be that of
+  the time of extraction, otherwise code that depends on the extracted
+  contents might not be rebuilt if the URL changes.  The OLD behavior
+  preserves the timestamps from the archive instead, but this is usually not
+  what you want.  Update your project to the NEW behavior or specify the
+  DOWNLOAD_EXTRACT_TIMESTAMP option with a value of true to avoid this
+  robustness issue.
+Call Stack (most recent call first):
+  CMakeLists.txt:9 (FetchContent_Declare)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found Python: C:/Users/wlaba/miniconda3/python.exe (found version "3.9.5") found components: Interpreter
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - not found
+-- Found Threads: TRUE
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Projects/googleTestPlay/my_project/build
+
+C:\Projects\googleTestPlay\my_project>cmake --build build
+MSBuild version 17.5.0+6f08c67f3 for .NET Framework
+
+  Checking Build System
+  Building Custom Rule C:/Projects/googleTestPlay/my_project/build/_deps/googletest-src/googlemock/CMakeLists.txt
+  gtest-all.cc
+  gmock-all.cc
+  Generating Code...
+  gmock.vcxproj -> C:\Projects\googleTestPlay\my_project\build\lib\Debug\gmock.lib
+  Building Custom Rule C:/Projects/googleTestPlay/my_project/build/_deps/googletest-src/googlemock/CMakeLists.txt
+  gtest-all.cc
+  gmock-all.cc
+  gmock_main.cc
+  Generating Code...
+  gmock_main.vcxproj -> C:\Projects\googleTestPlay\my_project\build\lib\Debug\gmock_main.lib
+  Building Custom Rule C:/Projects/googleTestPlay/my_project/build/_deps/googletest-src/googletest/CMakeLists.txt
+  gtest-all.cc
+  gtest.vcxproj -> C:\Projects\googleTestPlay\my_project\build\lib\Debug\gtest.lib
+  Building Custom Rule C:/Projects/googleTestPlay/my_project/build/_deps/googletest-src/googletest/CMakeLists.txt
+  gtest_main.cc
+  gtest_main.vcxproj -> C:\Projects\googleTestPlay\my_project\build\lib\Debug\gtest_main.lib
+  Building Custom Rule C:/Projects/googleTestPlay/my_project/CMakeLists.txt
+  hello_test.cc
+  hello_test.vcxproj -> C:\Projects\googleTestPlay\my_project\build\Debug\hello_test.exe
+  Building Custom Rule C:/Projects/googleTestPlay/my_project/CMakeLists.txt
+
+C:\Projects\googleTestPlay\my_project>cd build && ctest
+Test project C:/Projects/googleTestPlay/my_project/build
+    Start 1: HelloTest.BasicAssertions
+1/1 Test #1: HelloTest.BasicAssertions ........   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.02 sec
+
+C:\Projects\googleTestPlay\my_project\build> ctest --rerun-failed --output-on-failure  (Use "--rerun-failed --output-on-failure" to re-run the failed cases verbosely.)
+
+Test project C:/Projects/googleTestPlay/my_project/build
+    Start 1: HelloTest.BasicAssertions
+1/1 Test #1: HelloTest.BasicAssertions ........***Failed    0.01 sec
+Running main() from C:\Projects\googleTestPlay\my_project\build\_deps\googletest-src\googletest\src\gtest_main.cc
+Note: Google Test filter = HelloTest.BasicAssertions
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from HelloTest
+[ RUN      ] HelloTest.BasicAssertions
+C:\Projects\googleTestPlay\my_project\hello_test.cc(9): error: Expected equality of these values:
+  7 * 6
+    Which is: 42
+  41
+[  FAILED  ] HelloTest.BasicAssertions (0 ms)
+[----------] 1 test from HelloTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] HelloTest.BasicAssertions
+
+ 1 FAILED TEST
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.02 sec
+
+The following tests FAILED:
+          1 - HelloTest.BasicAssertions (Failed)
+Errors while running CTest
+
+C:\Projects\googleTestPlay\my_project\build>
